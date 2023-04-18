@@ -1,14 +1,10 @@
-# Standard library imports
+#!/usr/bin/env python
 from os import path
-
-# Third party imports
 from setuptools import (  # Always prefer setuptools over distutils
     find_packages,
     setup,
 )
-
-# Local application imports
-from {{cookiecutter.project_name}} import __version__
+from {{cookiecutter.package_name}} import __version__
 
 here = path.abspath(path.dirname(__file__))
 
@@ -23,13 +19,18 @@ setup(
     author_email="{{cookiecutter.author_email}}",
     license="MIT",
     classifiers=[
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ],
     packages=find_packages(exclude=["contrib", "docs", "tests*"]),
+    package_data = {
+        "{{cookiecutter.package_name}}": ["schemas/*.json"]
+    },
     test_suite="tests",
+    py_modules=["{{cookiecutter.package_name}}"],
     install_requires=[],
-    entry_points={},
+    entry_points="""
+        [console_scripts]
+        {{cookiecutter.project_name}}={{cookiecutter.package_name}}:main
+        """,
 )

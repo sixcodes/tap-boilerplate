@@ -1,6 +1,33 @@
+[tool.poetry]
+name = "{{cookiecutter.project_name}}"
+version = "0.1.0"
+description = ""
+authors = ["Opensource <opensource@sixcodes.com>"]
+
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+pydantic = "1.10.5"
+singer-python = {git = "https://github.com/sixcodes/singer-python.git", branch = "master"}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "7.2.1"
+pytest-cov = "4.0.0"
+pytest-mock = "3.10.0"
+mypy = "1.0.1"
+isort = "5.12.0"
+lxml = "4.9.2"
+safety = "1.9.0"
+bandit = "1.7.4"
+types-requests = "^2.28.1"
+
+
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta:__legacy__"
+requires = ["poetry-core>=1.0.0", "setuptools", "wheel"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+exclude = ['venv', '.venv']
 
 [tool.isort]
 multi_line_output = 3
@@ -8,7 +35,7 @@ include_trailing_comma = true
 no_inline_sort = true
 force_grid_wrap = 0
 use_parentheses = true
-line_length = 80
+line_length = 120
 skip = []
 import_heading_stdlib = 'Standard library imports'
 import_heading_thirdparty = 'Third party imports'
@@ -17,8 +44,8 @@ import_heading_localfolder = 'Local folder imports'
 known_first_party = ['.']
 
 [tool.black]
-line-length = 80
-target-version = ['py38']
+line-length = 120
+target-version = ["py39", "py310"]
 include = '\.pyi?$'
 exclude = '''
 /(
@@ -33,7 +60,7 @@ exclude = '''
   | build
   | dist
   | migrations
-
+  | \.ipynb_checkpoints
   # The following are specific to Black, you probably don't want those.
   | blib2to3
   | tests/data
